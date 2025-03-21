@@ -1,27 +1,11 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavBar } from '../app/components/HomeNavBar'
 	
 
-const Home = () => {
-	const navigate = useNavigate();
-	const username = localStorage.getItem("username");
-	const userData = JSON.parse(localStorage.getItem("userData"));
-	const handleLogout = () => {
-		localStorage.removeItem('isAuthenticated');
-		localStorage.removeItem('username');
-		localStorage.removeItem('userData');
-		navigate('/auth');
-	};
-
-
+export function Home () {
 	return (
-		<div>
-			<h1>Welcome to the Home Page</h1>
-			<h1>username: {username} </h1>
-			<h1>server response: {userData.role},{userData.message}</h1>
-			<button onClick={handleLogout}>Выйти</button>
+		<div className='h-screen bg-white'>
+			<NavBar />
 		</div>
 	);
 };
-
-export default Home;

@@ -11,6 +11,16 @@ const AuthForm = () => {
 	const [isLoading, setLoading] = useState(false);
 	const navigate = useNavigate();
 	
+	const parseMessage = (message) => {
+		const resultParsed = {};
+		message.split(',').forEach((item) => {
+			const [key, value] = item.split(':');
+			resultParsed[key.trim()] = value.trim();
+		});
+		return resultParsed;
+	};
+
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
@@ -21,7 +31,9 @@ const AuthForm = () => {
 			if (response.data.access === true) {
 				localStorage.setItem("isAuthenticated", "true");
 				localStorage.setItem("username", username);
-				localStorage.setItem("userData", JSON.stringify(response.data));
+				const parsedData = parseMessage(response.data.message);
+				const updatedData = {...response.data, ...parsedData, };
+				localStorage.setItem("userData", JSON.stringify(updatedData));
 				navigate('/');
 			} else {
 				setError("Неверный логин или пароль");
@@ -65,7 +77,7 @@ const AuthForm = () => {
 					</div>
 					<div className="text-left">
 						<p>
-							Используются логин и парль от <span className="font-bold">AD</span>
+							Используй логин и парль от <span className="font-bold">AD</span>
 						</p>
 						<p>
 							Писать <span className="font-bold">corp\</span> обязательно

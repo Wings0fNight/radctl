@@ -34,10 +34,10 @@ app.post('/auth', decodeBasicAuth, (req, res) => {
   // Проверяем логин и пароль
   if (username === 'admin' && password === 'password') {
     // Возвращаем успешный ответ с данными, которые ожидает фронтенд
-    res.status(200).json({ access: true, username, role: 'admin', message: 'Login successful' });
+    res.status(200).json({ access: true, message: 'role: admin, email: admin@mail.ru' });
   } if (username === 'user' && password === 'password') {
 	// Возвращаем успешный ответ с данными, которые ожидает фронтенд
-	res.status(200).json({ access: true, role: 'user', message: 'Login successful' });
+	res.status(200).json({ access: true, message: 'role: user, email: user@mail.ru' });
   } else {
     // Возвращаем ошибку, если данные неверны
     res.status(401).json({ access: false, message: 'Invalid credentials' });
