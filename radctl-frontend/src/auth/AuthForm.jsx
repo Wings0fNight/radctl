@@ -14,8 +14,8 @@ const AuthForm = () => {
 	const parseMessage = (message) => {
 		const resultParsed = {};
 		message.split(',').forEach((item) => {
-			const [key, value] = item.split(':');
-			resultParsed[key.trim()] = value.trim();
+			const [key, value] = part.trim().split(':').map((item) => item.trim());
+			result[key] = value;
 		});
 		return resultParsed;
 	};
