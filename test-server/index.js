@@ -37,7 +37,7 @@ app.post('/auth', decodeBasicAuth, (req, res) => {
     res.status(200).json({ access: true, username, role: 'admin', message: 'Login successful' });
   } if (username === 'user' && password === 'password') {
 	// Возвращаем успешный ответ с данными, которые ожидает фронтенд
-	res.status(200).json({ access: true, username, role: 'user', message: 'Login successful' });
+	res.status(200).json({ access: true, role: 'user', message: 'Login successful' });
   } else {
     // Возвращаем ошибку, если данные неверны
     res.status(401).json({ access: false, message: 'Invalid credentials' });

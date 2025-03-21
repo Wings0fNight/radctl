@@ -20,6 +20,8 @@ const AuthForm = () => {
 			const response = await auth(username, password);
 			if (response.data.access === true) {
 				localStorage.setItem("isAuthenticated", "true");
+				localStorage.setItem("username", username);
+				localStorage.setItem("userData", JSON.stringify(response.data));
 				navigate('/');
 			} else {
 				setError("Неверный логин или пароль");
