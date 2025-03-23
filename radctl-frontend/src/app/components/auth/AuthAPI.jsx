@@ -7,7 +7,6 @@ const authAPI = axios.create({
 	},
 });
 
-
 export const auth = async (username, password) => {
 	const credentials = btoa(`${username}:${password}`);
 

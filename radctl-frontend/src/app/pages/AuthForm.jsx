@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "./AuthAPI";
-import userSVG from "../app/assets/user.svg";
-import lockSVG from "../app/assets/lock.svg";
+import { auth } from "../components/auth/AuthAPI";
+import userSVG from "../assets/user.svg";
+import lockSVG from "../assets/lock.svg";
 
 const AuthForm = () => {
 	const [username, setUsername] = useState("");
@@ -14,8 +14,8 @@ const AuthForm = () => {
 	const parseMessage = (message) => {
 		const resultParsed = {};
 		message.split(',').forEach((item) => {
-			const [key, value] = part.trim().split(':').map((item) => item.trim());
-			result[key] = value;
+			const [key, value] = item.trim().split(':').map((item) => item.trim());
+			resultParsed[key] = value;
 		});
 		return resultParsed;
 	};
