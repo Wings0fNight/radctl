@@ -48,7 +48,7 @@ const AuthForm = () => {
 
 	return (
 		<div className="flex items-center justify-center h-screen p-10">
-			<div className="w-[50%] rounded-3xl bg-neutral-700 p-10 text-white shadow-2xl shadow-gray-900">
+			<div className="w-[40%] rounded-3xl bg-neutral-700 p-10 text-white shadow-2xl shadow-gray-900">
 				<h1 className="text-5xl font-bold mb-10 text-center">Авторизация</h1>
 				<form onSubmit={handleSubmit} className="flex flex-col gap-4">
 					<div className="relative">

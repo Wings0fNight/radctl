@@ -1,5 +1,5 @@
 import userProfileIcon from '../assets/user.svg';
-import exitIcon from '../assets/exit.svg';
+// import exitIcon from '../assets/exit.svg';
 import { useNavigate } from 'react-router-dom';
 
 export function UserProfile() {
@@ -17,7 +17,7 @@ export function UserProfile() {
 	return (
 		<div className="bg-gray-500 h-60 w-60 flex items-center justify-center">
 			<div className='relative'>
-				<img src={userProfileIcon} alt="" className="items-center w-30 h-30 bg-white rounded-full border border-black"/>
+				{/* <img src={userProfileIcon} alt="" className="items-center w-30 h-30 bg-white rounded-full border border-black"/> */}
 				<div className='grid grid-cols-2 gap-2 m-2'>
 				<div>
 					<p>{username}</p>
