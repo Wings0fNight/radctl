@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 
 const AdminProtect = ({ children }) => {
@@ -14,7 +14,7 @@ const AdminProtect = ({ children }) => {
 	if (userData.role !== "admin") {
 		return <Navigate to="/" replace/>;
 	} else {
-		return children;
+		return < Outlet />;
 	}
 };
 
