@@ -11,12 +11,12 @@ const AuthForm = () => {
 	const [isLoading, setLoading] = useState(false);
 	const navigate = useNavigate();
 	
-	const parseMessage = (message) => {
+	const parseMessage = (res) => {
 		const resultParsed = {};
-		message.split(',').forEach((item) => {
-			const [key, value] = item.trim().split(':').map((item) => item.trim());
-			resultParsed[key] = value;
-		});
+		// res.split(',').forEach((item) => {
+		// 	const [key, value] = item.trim().split(':').map((item) => item.trim());
+		// 	resultParsed[key] = value;
+		// });
 		return resultParsed;
 	};
 
@@ -28,12 +28,11 @@ const AuthForm = () => {
 
 		try {
 			const response = await auth(username, password);
-			if (response.data.access === true) {
+			if (response.data.auth === true) {
 				localStorage.setItem("isAuthenticated", "true");
-				localStorage.setItem("username", username);
-				const parsedData = parseMessage(response.data.message);
-				const updatedData = {...response.data, ...parsedData, };
-				localStorage.setItem("userData", JSON.stringify(updatedData));
+				localStorage.setItem("token", "token");
+
+				localStorage.setItem("userData", "{}");
 				navigate('/');
 			} else {
 				setError("Неверный логин или пароль");
@@ -56,7 +55,7 @@ const AuthForm = () => {
 						<input 
 							className="w-full pl-10 p-4 border border-gray-300 rounded"
 							type="text"
-							placeholder="corp\username"
+							placeholder="username"
 							value={username}
 							onChange={(e) => setUsername(e.target.value)}
 							required
@@ -78,9 +77,6 @@ const AuthForm = () => {
 					<div className="text-left">
 						<p>
 							Используй логин и парль от <span className="font-bold">AD</span>
-						</p>
-						<p>
-							Писать <span className="font-bold">corp\</span> обязательно
 						</p>
 					</div>
 

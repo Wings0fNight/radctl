@@ -6,34 +6,29 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
-app.use(cors()); // Добавляем CORS для обработки запросов с фронтенда
+app.use(cors()); 
 
-// Middleware для декодирования Basic Auth
 const decodeBasicAuth = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
-  // Проверяем, есть ли заголовок Authorization и начинается ли он с "Basic "
   if (!authHeader || !authHeader.startsWith('Basic ')) {
     return res.status(401).json({ message: 'Unauthorized' });
   }
 
-  // Извлекаем закодированные данные
   const base64Credentials = authHeader.split(' ')[1];
   const credentials = Buffer.from(base64Credentials, 'base64').toString('utf-8');
   const [username, password] = credentials.split(':');
 
-  // Добавляем данные в объект запроса
   req.auth = { username, password };
   next();
 };
 
-// Эндпоинт для авторизации
 app.post('/auth', decodeBasicAuth, (req, res) => {
   const { username, password } = req.auth;
 
-  // Проверяем логин и пароль
+
   if (username === 'admin' && password === 'password') {
-    // Возвращаем успешный ответ с данными, которые ожидает фронтенд
+
     res.status(200).json({ access: true, message: 'role: admin, email: admin@mail.ru' });
   } if (username === 'user' && password === 'password') {
 	// Возвращаем успешный ответ с данными, которые ожидает фронтенд
