@@ -22,8 +22,8 @@ const AdminLinks = () => {
 
 const Exit = () => {
 	const navigate = useNavigate();
-	const username = localStorage.getItem("username");
-	const userData = JSON.parse(localStorage.getItem("userData"));
+	// const username = localStorage.getItem("username");
+	// const userData = JSON.parse(localStorage.getItem("userData"));
 	const handleLogout = () => {
 		localStorage.removeItem('isAuthenticated');
 		localStorage.removeItem('username');
