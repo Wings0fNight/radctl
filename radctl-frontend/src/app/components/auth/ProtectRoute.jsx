@@ -1,14 +1,14 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet} from "react-router-dom";
 
 const ProtectRoute = ({ children }) => {
 	const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
 
 	if (!isAuthenticated) {
-		return <Navigate to="/auth" />;
+		return <Navigate to="/auth" replace/>;
 	}
 
-	return children;
+	return <Outlet/>;
 };
 
 export default ProtectRoute;

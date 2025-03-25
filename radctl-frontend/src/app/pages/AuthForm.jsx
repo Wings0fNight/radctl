@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "./AuthAPI";
-import userSVG from "../app/assets/user.svg";
-import lockSVG from "../app/assets/lock.svg";
+import { auth } from "../components/auth/AuthAPI";
+import userSVG from "../assets/user.svg";
+import lockSVG from "../assets/lock.svg";
 
 const AuthForm = () => {
 	const [username, setUsername] = useState("");
@@ -11,6 +11,16 @@ const AuthForm = () => {
 	const [isLoading, setLoading] = useState(false);
 	const navigate = useNavigate();
 	
+	const parseMessage = (message) => {
+		const resultParsed = {};
+		message.split(',').forEach((item) => {
+			const [key, value] = item.trim().split(':').map((item) => item.trim());
+			resultParsed[key] = value;
+		});
+		return resultParsed;
+	};
+
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
@@ -20,6 +30,10 @@ const AuthForm = () => {
 			const response = await auth(username, password);
 			if (response.data.access === true) {
 				localStorage.setItem("isAuthenticated", "true");
+				localStorage.setItem("username", username);
+				const parsedData = parseMessage(response.data.message);
+				const updatedData = {...response.data, ...parsedData, };
+				localStorage.setItem("userData", JSON.stringify(updatedData));
 				navigate('/');
 			} else {
 				setError("Неверный логин или пароль");
@@ -34,7 +48,7 @@ const AuthForm = () => {
 
 	return (
 		<div className="flex items-center justify-center h-screen p-10">
-			<div className="w-[50%] rounded-3xl bg-neutral-700 p-10 text-white shadow-2xl shadow-gray-900">
+			<div className="w-[40%] rounded-3xl bg-neutral-700 p-10 text-white shadow-2xl shadow-gray-900">
 				<h1 className="text-5xl font-bold mb-10 text-center">Авторизация</h1>
 				<form onSubmit={handleSubmit} className="flex flex-col gap-4">
 					<div className="relative">
@@ -63,7 +77,7 @@ const AuthForm = () => {
 					</div>
 					<div className="text-left">
 						<p>
-							Используются логин и парль от <span className="font-bold">AD</span>
+							Используй логин и парль от <span className="font-bold">AD</span>
 						</p>
 						<p>
 							Писать <span className="font-bold">corp\</span> обязательно
