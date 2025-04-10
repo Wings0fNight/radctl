@@ -1,15 +1,15 @@
 import axios from "axios";
 
-const authAPI = axios.create({
+const editAPI = axios.create({
 	baseURL: "http://10.101.28.50:7881",
 });
 
-export const auth = async (username, password) => {
-	const credentials = btoa(`${username}:${password}`);
-	const response = await authAPI.post('/login/auth', {},
+export const edit = async (XXX) => {
+
+	const response = await authAPI.post('/', {},
 	 {
 		headers: {
-			'Authorization': `${credentials}`,
+			'':'',
 			'Access-Control-Allow-Origin':'*',
 		},
 	},);

@@ -1,12 +1,12 @@
 import React from 'react';
+import UserProfile from '../components/home/UserProfileCard'
+import UserAccess from '../components/home/UserAccessCards'
 
-
-const userData = localStorage.getItem('userData');
 export function Home () {
 	return (
-		<div className='h-screen bg-white'>
-			<h1>Home</h1>
-			<p>{userData.uname}</p>
+		<div className='h-screen bg-gray-100 max-w-[100%] p-5'>
+			<UserProfile />
+			<UserAccess />
 		</div>
 	);
 };
